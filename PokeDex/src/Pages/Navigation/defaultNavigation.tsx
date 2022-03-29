@@ -4,14 +4,14 @@ import { Home } from '../Home/';
 import { Welcome } from '../Welcome/';
 import { About } from '../About/';
 
-const Navegacao = createStackNavigator();
+const StackNavigator = createStackNavigator();
 
 export function DefaultNavigation() {
   return (
-    <Navegacao.Navigator>
-      <Navegacao.Screen name="Welcome" component={Welcome} />
-      <Navegacao.Screen name="Home" component={Home} />
-      <Navegacao.Screen name="About" component={About} />
-    </Navegacao.Navigator>
+    <StackNavigator.Navigator>
+      <StackNavigator.Screen name="Welcome" component={Welcome} />
+      <StackNavigator.Screen name="Home" component={Home} />
+      <StackNavigator.Screen name="About" component={About} />
+    </StackNavigator.Navigator>
   )
 }
