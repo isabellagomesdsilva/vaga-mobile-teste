@@ -1,18 +1,15 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 
-import { DefaultNavigation } from './src/Pages/Navigation/';
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
-
+import {DefaultNavigation} from './src/Pages/Navigation/';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 export function App() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{flex: 1}}>
       <NavigationContainer>
         <DefaultNavigation />
       </NavigationContainer>
     </GestureHandlerRootView>
-  )
+  );
 }
-
-

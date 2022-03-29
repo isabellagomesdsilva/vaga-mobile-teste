@@ -1,8 +1,6 @@
 import React from 'react';
-import { Text } from 'react-native';
+import {Text} from 'react-native';
 
 export function About() {
-  return (
-    <Text>OI</Text>
-  )
+  return <Text>OI</Text>;
 }
