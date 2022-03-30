@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         height: "34%",
         backgroundColor: "white",
+
     },
     animation: {
         width: 230,
@@ -39,10 +40,10 @@ export const styles = StyleSheet.create({
         height: 48,
         justifyContent: "center",
         alignItems: "center",
+        alignSelf: "center",
         elevation: 15,
         shadowColor: "52006A",
         marginTop: 20,
-        marginLeft: 10,
     },
     buttonIcon: {
         height: 37,
