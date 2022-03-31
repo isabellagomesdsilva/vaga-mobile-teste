@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {DefaultNavigation} from './src/Pages/Navigation/';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
+
 export function App() {
   return (
     <GestureHandlerRootView style={{flex: 1}}>

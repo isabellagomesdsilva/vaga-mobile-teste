@@ -8,6 +8,9 @@ import {
   ImageBackground,
   Pressable,
 } from 'react-native';
+
+import {TextInput, Card, Title, Paragraph} from 'react-native-paper';
+
 import {api} from './';
 
 const imgF = require('../../assets/Images/PokeballFundo.png');
@@ -47,40 +50,68 @@ export function Home() {
     tipo();
   }, []);
 
+  const idPokemon = (url: string) => {
+    let res = url.split('/')
+    const idPoke = res[4];
+    if (idPoke) {
+      return `https://pokeapi.co/api/v2/pokemon/${idPoke}`
+    };
+    return '';
+  }
+
   return (
     <View style={[styles.container, {flex: 1}]}>
-
       <FlatList
         data={pokemon}
         renderItem={({item, index}) => (
-          <View style={{width: 300}} key={index}>
-            <Text>{item.name}</Text>
-            <Image style={[styles.img]} source={{uri: imgPoke(item.url)}} />
-          </View>
+          <Card style={styles.card}>
+            <Card.Content>
+              <View style={styles.cardItem} key={index}>
+                <Paragraph></Paragraph>
+                <Title style={styles.txtCard}>{item.name}</Title>
+                <Image style={[styles.img]} source={{uri: imgPoke(item.url)}} />
+              </View>
+            </Card.Content>
+          </Card>
         )}
-        ListHeaderComponent = {() => (
-          <><View>
-            <ImageBackground
-              source={imgF}
-              resizeMode="contain"
-              style={styles.imgF}></ImageBackground>
-          </View><View style={styles.containerIcons}>
+        ListHeaderComponent={() => (
+          <>
+            <View>
+              <ImageBackground
+                source={imgF}
+                resizeMode="contain"
+                style={styles.imgF}></ImageBackground>
+            </View>
+            <View style={styles.containerIcons}>
               <Pressable>
                 <Image source={Sort} style={styles.icons} />
               </Pressable>
               <Pressable>
                 <Image source={Filter} style={styles.icons} />
               </Pressable>
-            </View><View>
+            </View>
+            <View>
               <Text style={styles.titulo}>Pokédex</Text>
               <Text style={styles.subTitulo}>
-                Procure por seu Pokémon favorito pelo nome ou usando o número dele.
+                Procure por seu Pokémon favorito pelo nome ou usando o número
+                dele.
               </Text>
-            </View></>
+              <TextInput
+                style={styles.Input}
+                mode="outlined"
+                label="Name or ID"
+                placeholder="Pesquisa"
+                onChangeText={() => text}
+                selectionColor="#C41717"
+                outlineColor="black"
+                activeOutlineColor="black"
+                underlineColor="transparent"
+                right={<TextInput.Icon name="eye" />}
+              />
+            </View>
+          </>
         )}
-        ItemSeparatorComponent = {() => (
-          <View style={{height: 20}}></View>
-        )}
+        ItemSeparatorComponent={() => <View style={{height: 15}}></View>}
       />
     </View>
   );
@@ -92,8 +123,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   img: {
-    width: 50,
-    height: 50,
+    width: 100,
+    height: 100,
   },
   imgF: {
     width: '100%',
@@ -111,7 +142,7 @@ const styles = StyleSheet.create({
   subTitulo: {
     marginTop: -15,
     marginLeft: 15,
-    marginBottom: 20,
+
     color: 'black',
     fontSize: 18,
     fontFamily: 'SF-Pro-Display-Light',
@@ -127,4 +158,32 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
+  Input: {
+    backgroundColor: '#F7F9F9',
+    width: 350,
+    justifyContent: 'center',
+    marginLeft: 15,
+    marginBottom: 15,
+  },
+  place: {
+    size: 20,
+    color: 'black',
+  },
+  card:{
+    alignSelf: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    width: 350,
+    height: 125,
+    backgroundColor: '#EA5D60'
+  },
+  cardItem:{
+    alignSelf: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  txtCard:{
+    marginTop: 15,
+    textTransform: 'capitalize',
+  }
 });
