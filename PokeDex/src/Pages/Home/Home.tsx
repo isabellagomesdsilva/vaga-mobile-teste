@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import {TextInput, Card, Title, Paragraph} from 'react-native-paper';
+import { PokemonCard } from '../../modules/pokemons/cards';
 
 import {api} from './';
 
@@ -29,50 +30,14 @@ export function Home() {
     loadPokemon();
   }, []);
 
-  const imgPoke = (url: string) => {
-    let resultado = url.split('/');
-    const id = resultado[6];
-    if (id) {
-      return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id.padStart(
-        3,
-        '0',
-      )}.png`;
-    }
-    return '';
-  };
 
-  const [type, setType] = useState();
-  useEffect(() => {
-    const tipo = async () => {
-      const {data} = await api.get('type/');
-      setType(data.results);
-    };
-    tipo();
-  }, []);
-
-  const idPokemon = (url: string) => {
-    let res = url.split('/')
-    const idPoke = res[4];
-    if (idPoke) {
-      return `https://pokeapi.co/api/v2/pokemon/${idPoke}`
-    };
-    return '';
-  }
 
   return (
     <View style={[styles.container, {flex: 1}]}>
       <FlatList
         data={pokemon}
         renderItem={({item, index}) => (
-          <Card style={styles.card}>
-            <Card.Content>
-              <View style={styles.cardItem} key={index}>
-                <Paragraph></Paragraph>
-                <Title style={styles.txtCard}>{item.name}</Title>
-                <Image style={[styles.img]} source={{uri: imgPoke(item.url)}} />
-              </View>
-            </Card.Content>
-          </Card>
+          <PokemonCard key={index} pokemon={item}/>
         )}
         ListHeaderComponent={() => (
           <>
@@ -111,7 +76,7 @@ export function Home() {
             </View>
           </>
         )}
-        ItemSeparatorComponent={() => <View style={{height: 15}}></View>}
+        ItemSeparatorComponent={() => <View style={{height: 10}}></View>}
       />
     </View>
   );
