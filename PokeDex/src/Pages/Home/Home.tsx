@@ -7,9 +7,9 @@ import {
   Image,
   ImageBackground,
   Pressable,
+  TextInput
 } from 'react-native';
 
-import {TextInput, Card, Title, Paragraph} from 'react-native-paper';
 import { PokemonCard } from '../../modules/pokemons/cards';
 
 import {api} from './';
@@ -63,15 +63,9 @@ export function Home() {
               </Text>
               <TextInput
                 style={styles.Input}
-                mode="outlined"
-                label="Name or ID"
                 placeholder="Pesquisa"
-                onChangeText={() => text}
-                selectionColor="#C41717"
-                outlineColor="black"
-                activeOutlineColor="black"
-                underlineColor="transparent"
-                right={<TextInput.Icon name="eye" />}
+                value=""
+
               />
             </View>
           </>
@@ -125,30 +119,15 @@ const styles = StyleSheet.create({
   },
   Input: {
     backgroundColor: '#F7F9F9',
-    width: 350,
+    width: 320,
+    height: 55,
+    borderRadius: 10,
+    alignSelf: 'center',
     justifyContent: 'center',
-    marginLeft: 15,
     marginBottom: 15,
+    marginTop: 5,
+    elevation: 8,
+    
   },
-  place: {
-    size: 20,
-    color: 'black',
-  },
-  card:{
-    alignSelf: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    width: 350,
-    height: 125,
-    backgroundColor: '#EA5D60'
-  },
-  cardItem:{
-    alignSelf: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  txtCard:{
-    marginTop: 15,
-    textTransform: 'capitalize',
-  }
+
 });
