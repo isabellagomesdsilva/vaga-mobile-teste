@@ -103,7 +103,7 @@ export function PokemonCard({pokemon}: PokemonCardProps) {
                 styles.boxType,
                 {
                   backgroundColor:
-                    backgroundColors[pokemonTypes?.[0]?.type?.name || 'normal'],
+                    backgroundColors[type.name || 'normal'],
                 },
               ]}>
               <Text key={index} style={styles.txtType}>

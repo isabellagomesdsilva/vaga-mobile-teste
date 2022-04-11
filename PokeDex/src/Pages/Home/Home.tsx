@@ -1,3 +1,4 @@
+import { PrivateValueStore } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
@@ -7,10 +8,11 @@ import {
   Image,
   ImageBackground,
   Pressable,
-  TextInput
+  TextInput,
+  StatusBar,
 } from 'react-native';
 
-import { PokemonCard } from '../../modules/pokemons/cards';
+import {PokemonCard} from '../../modules/pokemons/cards';
 
 import {api} from './';
 
@@ -21,7 +23,16 @@ const Sort = require('../../assets/Icons/Vectorsort.png');
 const Filter = require('../../assets/Icons/Vectorfilter.png');
 
 export function Home() {
-  const [pokemon, setPokemon] = useState();
+  const [pokemonSelect, setPokemonSelect] = useState()
+
+  const handleInput = (value: string) => {
+    setPokemonSelect(pokemon.filter(pokemon => pokemon.name.toLowerCase().match(value.toLowerCase())))
+  }
+  const handleOrderClick = () => {};
+
+  const handleTypeClick = () => {};
+
+  const [pokemon, setPokemon] = useState<any>([]);
   useEffect(() => {
     const loadPokemon = async () => {
       const {data} = await api.get('pokemon/?limit=20&offset=0');
@@ -30,14 +41,12 @@ export function Home() {
     loadPokemon();
   }, []);
 
-
-
   return (
     <View style={[styles.container, {flex: 1}]}>
       <FlatList
-        data={pokemon}
+        data={pokemonSelect || pokemon}
         renderItem={({item, index}) => (
-          <PokemonCard key={index} pokemon={item}/>
+          <PokemonCard key={index} pokemon={item} />
         )}
         ListHeaderComponent={() => (
           <>
@@ -48,10 +57,10 @@ export function Home() {
                 style={styles.imgF}></ImageBackground>
             </View>
             <View style={styles.containerIcons}>
-              <Pressable>
+              <Pressable onPress={handleOrderClick}>
                 <Image source={Sort} style={styles.icons} />
               </Pressable>
-              <Pressable>
+              <Pressable onPress={handleTypeClick}>
                 <Image source={Filter} style={styles.icons} />
               </Pressable>
             </View>
@@ -63,15 +72,16 @@ export function Home() {
               </Text>
               <TextInput
                 style={styles.Input}
-                placeholder="Pesquisa"
-                value=""
-
+                placeholder="Pesquise um Pokémon"
+                onChange={() => console.log(pokemonSelect)}
+                onChangeText={ handleInput}
               />
             </View>
           </>
         )}
         ItemSeparatorComponent={() => <View style={{height: 10}}></View>}
       />
+      <StatusBar />
     </View>
   );
 }
@@ -127,7 +137,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     marginTop: 5,
     elevation: 8,
-    
+    fontSize: 17,
+    paddingLeft: 12,
   },
-
 });
